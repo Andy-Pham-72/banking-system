@@ -5,6 +5,8 @@ Python OOP - Banking System Case Study in Python.
 
 In this project, I created a simple version of a banking system which I incoporate some **Python fundamental skills**: inheritance, exception handling, logging, getter and setter methods along with **SQL database** that associates with the Python script in order to produce the csv as a type of data storage.
 
+We can easily run the .py file in the command line in order to experience the app locally.
+
 All the classes, methods, and functions are documented with docstring comments.
 
 The project consist of 2 main files and 1 log file:
