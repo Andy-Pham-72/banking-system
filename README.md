@@ -1,4 +1,4 @@
-# banking-system
+# Banking-system
 Python OOP - Banking System Case Study in Python.
 
 <img width="919" alt="Screen Shot 2021-09-02 at 5 13 06 PM" src="https://user-images.githubusercontent.com/70767722/131917196-200d6e84-ef4d-4eac-b4d6-c268dd6a9054.png">
