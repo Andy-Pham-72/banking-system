@@ -30,7 +30,22 @@ The project consist of 2 main files and 1 log file:
 
 ![Screen Shot 2021-09-02 at 4 52 09 PM](https://user-images.githubusercontent.com/70767722/131917278-0e5e089f-8f0c-4398-b6cb-1f0c81fe85ba.png)
 
-# Any code comments and suggestions are very welcome!
+## Requirements:
+I used MySQL as the database management system and you also need to install `mysql_connector_repackage` in order to use Python script to connect with the MySql server. Please check this [link for the installing instruction](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html)
+
+For Mac user:
+
+```
+shell> pip install mysql-connector-python
+```
+
+For Windows user:
+
+```
+shell> msiexec /i mysql-connector-python-VER-pyPYVER.msi
+```
+
+## Any code comments and suggestions are very welcome!
 If you have any question please reach me out through my personal email: [aqpham@gmail.com]
 
 Cheers!
