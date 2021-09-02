@@ -1,0 +1,4 @@
+2021-09-01 00:12:02,576 : DEBUG : __main__ : A debug message: 1054 (42S22): Unknown column '45yhgre' in 'field list' at 2021-09-01
+2021-09-01 00:15:29,540 : DEBUG : __main__ : A debug message: 1054 (42S22): Unknown column '5467y564uj' in 'field list' at 2021-09-01 00:15:29.540516
+2021-09-01 00:49:03,267 : ERROR : __main__ : A debug message: ValueError in show_details() at 2021-09-01 00:49:03.267491
+2021-09-01 00:49:44,805 : ERROR : __main__ : A debug message: ValueError in show_details() at 2021-09-01 00:49:44.805737

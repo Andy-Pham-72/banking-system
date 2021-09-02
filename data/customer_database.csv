@@ -1,0 +1,11 @@
+acc_no,first_name,last_name,dob,phone,email,acc_type,status,balance
+1,John,Pham,1991-02-07,647-901-8899,johnpham@gmail.com,checking,active,65200.00
+2,Niki,Johanson,1982-08-04,466-894-3452,niki@hotmail.com,saving,active,18000.00
+3,Alexa,Mongor,1962-10-09,776-364-7689,alexa@shopify.com,saving,active,90530.60
+4,Michael,Xavier,1977-12-24,967-438-2651,xavierm@gmail.com,saving,close,7430.12
+5,Alice,Horenfrew,1999-05-22,457-859-2490,aliceholre@yahoo.com,checking,active,689.06
+6,Jenna,Solomon,1992-09-12,932-234-3589,jenna.solo@gmail.com,checking,active,35060.00
+7,Keith,Nguyen,1995-12-19,234-938-2940,keith.ng@gmail.com,saving,active,15400.00
+8,Helen,Johnhanson,1976-12-09,234-546-3495,helenjo@hotmail.com,saving,active,12400.00
+9,Micheal,Jackson,1960-03-24,234-534-9234,michael.ja@gmail.com,checking,active,254800.00
+10,Daniel,Fang,1988-09-23,243-381-3980,dan.fan@gmail.com,checking,active,1500.00
