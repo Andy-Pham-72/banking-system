@@ -22,11 +22,11 @@ The project consist of 2 main files and 1 log file:
 
 **Main Menu**
 
-![Screen Shot 2021-09-02 at 4 52 29 PM](https://user-images.githubusercontent.com/70767722/131917246-5dd64f80-4d24-476a-bd2d-9076a2c7e443.png)
+![Screen Shot 2021-09-02 at 4 53 43 PM](https://user-images.githubusercontent.com/70767722/131917265-51c81e77-0382-4a8f-b7f0-c9f509202e90.png)
 
 **Transaction Menu**
 
-![Screen Shot 2021-09-02 at 4 53 43 PM](https://user-images.githubusercontent.com/70767722/131917265-51c81e77-0382-4a8f-b7f0-c9f509202e90.png)
+![Screen Shot 2021-09-02 at 4 52 29 PM](https://user-images.githubusercontent.com/70767722/131917246-5dd64f80-4d24-476a-bd2d-9076a2c7e443.png)
 
 **Account Information example**
 
@@ -46,6 +46,13 @@ For Windows user:
 ```
 shell> msiexec /i mysql-connector-python-VER-pyPYVER.msi
 ```
+
+## Future works:
+* I want to add more features for the banking system; for example: 
+    - `Search Menu` (using account number, email, phone number, first name, or last name to list the corresponding customer information),
+    - `Daily and Monthly Reports` to show the updated account information, 
+    - `Account Adjustment` to change or update account information by using the account number.
+    - `Payment Method` to save the transaction payment record with different types of payment (Visa, Master, Paypal). 
 
 ## Any code comments and suggestions are very welcome!
 If you have any question please reach me out through my personal email: [aqpham@gmail.com]
