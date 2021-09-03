@@ -54,7 +54,7 @@ shell> msiexec /i mysql-connector-python-VER-pyPYVER.msi
     - `Account Adjustment` to change or update account information by using the account number.
     - `Payment Method` to save the transaction payment record with different types of payment (Visa, Master, Paypal). 
 
-## Any code comments and suggestions are very welcome!
+## Any code comments and contributions are very welcome!
 If you have any question please reach me out through my personal email: [aqpham@gmail.com]
 
 Cheers!
