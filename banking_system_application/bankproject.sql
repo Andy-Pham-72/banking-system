@@ -1,4 +1,4 @@
--- ANDY PHAM BANKING SYSTEM PROJECT 
+-- ANDY PHAM BANKING SYSTEM PROJECT --
 
 # UNKNOWN BANK MANAGEMENT DATABASE
 
@@ -7,7 +7,9 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+--
 -- Database: `bankingsys`
+--
 
 CREATE database bankingsys;
 USE bankingsys;
@@ -34,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
 
 --
 -- Inserting data for table `customer`
-
+--
 
 INSERT INTO `customer` (`acc_no`, `first_name`, `last_name`, `dob`, `phone`, `email`, `acc_type`, `status`, `balance`) VALUES
 (1, 'John', 'Pham', '02-07-1991', '647-901-8899', 'johnpham@gmail.com', 'checking', 'active', 65200.00),
@@ -46,8 +48,8 @@ INSERT INTO `customer` (`acc_no`, `first_name`, `last_name`, `dob`, `phone`, `em
 ##################################################
 
 --
--- Table structure for table `transaction`
-
+-- Table `transaction`
+--
 
 DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE IF NOT EXISTS `transaction` (
@@ -61,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
 
 --
 -- Inserting data for table `transaction`
-
+--
 
 INSERT INTO `transaction` (`index`, `date`, `amount`, `type`, `acc_no`) VALUES
 (1, '2021-10-16', 3000, 'deposit', 1),
