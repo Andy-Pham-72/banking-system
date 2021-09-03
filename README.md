@@ -11,7 +11,7 @@ All the classes, methods, and functions are documented with docstring comments.
 
 The project consist of 2 main files and 1 log file:
 * 1. **[banking_system.py](https://github.com/Andy-Pham-72/banking-system/blob/master/banking_system_application/banking_system.py)** - source code to run the application
-* 2. **[banking_system.sql](https://github.com/Andy-Pham-72/banking-system/blob/master/banking_system_application/bankproject.sql)** - sql database script
+* 2. **[banking_system.sql](https://github.com/Andy-Pham-72/banking-system/blob/master/banking_system_application/bankproject.sql)** - MySql database script
 * 3. **[unknown_bank_management.log](https://github.com/Andy-Pham-72/banking-system/blob/master/data/unknown_bank_management.log)** - an example of logging
 
 **The classes UML diagram**
