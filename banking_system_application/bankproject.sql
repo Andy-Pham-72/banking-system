@@ -58,7 +58,8 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `amount` float(10) DEFAULT NULL,
   `type` char(20) DEFAULT NULL,
   `acc_no` int(10) DEFAULT NULL,
-  PRIMARY KEY (`index`)
+  PRIMARY KEY (`index`),
+  FOREIGN KEY (`acc_no`) REFERENCES customer(`acc_no`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
