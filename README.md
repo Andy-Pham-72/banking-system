@@ -59,6 +59,6 @@ shell> msiexec /i mysql-connector-python-VER-pyPYVER.msi
     - `Payment Method` to save the transaction payment record with different types of payment (Visa, Master, Paypal). 
 
 ## Any code comments and contributions are very welcome!
-If you have any question please reach me out through my personal email: [aqpham@gmail.com]
+If you have any question please reach me out through my personal email: [aqpham02@gmail.com]
 
 Cheers!
