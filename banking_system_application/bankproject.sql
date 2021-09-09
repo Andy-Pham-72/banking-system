@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `acc_no` int(10) DEFAULT NULL,
   PRIMARY KEY (`index`),
   FOREIGN KEY (`acc_no`) REFERENCES customer(`acc_no`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 --
 -- Inserting data for table `transaction`
