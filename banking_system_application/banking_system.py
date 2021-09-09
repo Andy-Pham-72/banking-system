@@ -312,19 +312,25 @@ class UnknownBank(SqlFuncs):
                     print(result[0],"$", result[1], result[2])
             self.wait = input('\n\n\nPress enter key to continue....')
 
-        except SyntaxError:
-            print("\n*************\nWrong input!\n*************\n")
+        except SyntaxError as err:
+            print("\n*************\nWrong input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'An error message: SyntaxError in show_details()')
+            logger.error("Invalid input: '{}' . An error message: SyntaxError in show_details()".format(self.acc_num,err))
             self.show_details()
-        except ValueError:
-            print("\n*************\nWrong input!\n*************\n")
+        except ValueError as err:
+            print("\n*************\nWrong input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'An error message: ValueError in show_details()')
+            logger.error("Invalid input: '{}' . An error message: ValueError in show_details()".format(self.acc_num,err))
+            self.show_details()
+        except TypeError as err:
+            print("\n*************\nWrong input!\n*************\nPlease try again!\n")
+            # Log
+            logger.error("Invalid input: '{}' .An error message: {} in show_details()".format(self.acc_num,err))
             self.show_details()
         except mysql.connector.errors.ProgrammingError as err:
-            logger.debug(f'A debug message: {err}')
             print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
+            # Log
+            logger.debug("Invalid input: '{}' in show_details(). A debug message: {}".format(self.acc_num,err))
             self.show_details()
 
     def main_menu(self):
