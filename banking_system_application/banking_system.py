@@ -185,7 +185,8 @@ class UnknownBank(SqlFuncs):
             self.main_menu()
 
     def deposit_amount(self):
-        """method that makes a deposit into an account
+        """
+        method that makes a deposit into an account
         """
 
         try:
@@ -249,7 +250,8 @@ class UnknownBank(SqlFuncs):
                 self.execute(sql1)
                 self.execute(sql2)
                 print('\n\nAmount Withdrawn!')
-
+            elif result[0] == 'close':
+                print('\n\nClosed or Suspended Account!')
             else:
                 print('\n\nClosed or Suspended Account.Or Insufficient amount!')
 
