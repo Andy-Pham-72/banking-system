@@ -257,20 +257,27 @@ class UnknownBank(SqlFuncs):
 
             self.wait = input('\n\n\nPress enter key to continue....')
 
-        except SyntaxError:
-            print("\n*************\nInvalid input! \nPlease Try Again!\n*************\n\n")
+        except ValueError as err:
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'A error message: SyntaxError in withdraw_amount()')
+            logger.error("Invalid input: for the amount: '{}' and the account number: '{}' in withdraw_amount(). \
+                        An error message: {} in withdraw_amount()".format(self.amount,self.acc_num,err))
+            # Back to transaction menu
             self.transaction_menu()
-        except ValueError:
-            print("\n*************\nInvalid input! \nPlease Try Again! \n*************\n\n")
+        except TypeError as err:
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'An error message: ValueError in withdraw_amount()')
+            logger.error("Invalid input: for the amount: '{}' and the account number: '{}' in withdraw_amount(). \
+                        An error message: {} in withdraw_amount()".format(self.amount,self.acc_num,err))
+            # Back to transaction menu
             self.transaction_menu()
         except mysql.connector.errors.ProgrammingError as err:
-            print("\n*************\nInvalid input: {}! \nPlease Try Again! \n*************\n\n".format(err))
+            print("\n*************\nInvalid input associating with MySql syntax: {}! \
+                    \nPlease Try Again! \n*************\n\n".format(err))
             # Log
-            logger.debug(f'A debug message: {err} from withdraw_amount()')
+            logger.debug("Invalid input: for the amount: '{}' and the account number: '{}' in withdraw_amount(). \
+                        A debug message: {}".format(self.amount,self.acc_num,err))
+            # Back to transaction menu
             self.transaction_menu()
 
     def show_details(self):
@@ -312,25 +319,23 @@ class UnknownBank(SqlFuncs):
                     print(result[0],"$", result[1], result[2])
             self.wait = input('\n\n\nPress enter key to continue....')
 
-        except SyntaxError as err:
-            print("\n*************\nWrong input!\n*************\nPlease try again!\n")
-            # Log
-            logger.error("Invalid input: '{}' . An error message: SyntaxError in show_details()".format(self.acc_num,err))
-            self.show_details()
         except ValueError as err:
-            print("\n*************\nWrong input!\n*************\nPlease try again!\n")
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error("Invalid input: '{}' . An error message: ValueError in show_details()".format(self.acc_num,err))
+            logger.error("Invalid input: '{}' . An error message: {} in show_details()".format(self.acc_num,err))
+            # Back to input acc_num
             self.show_details()
         except TypeError as err:
-            print("\n*************\nWrong input!\n*************\nPlease try again!\n")
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error("Invalid input: '{}' .An error message: {} in show_details()".format(self.acc_num,err))
+            logger.error("Invalid input: '{}' . An error message: {} in show_details()".format(self.acc_num,err))
+            # Back to input acc_num
             self.show_details()
         except mysql.connector.errors.ProgrammingError as err:
             print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
             # Log
             logger.debug("Invalid input: '{}' in show_details(). A debug message: {}".format(self.acc_num,err))
+            # Back to input acc_num
             self.show_details()
 
     def main_menu(self):
@@ -365,12 +370,12 @@ class UnknownBank(SqlFuncs):
                     break
 
             except SyntaxError:
-                print("\n*************\nWrong input!\n*************\n")
+                print("\n*************\nInvalid input!\n*************\n")
                 # Log
                 logger.error(f'An error message: SyntaxError in show_details()')
                 self.main_menu()
             except ValueError:
-                print("\n*************\nWrong input!\n*************\n")
+                print("\n*************\nInvalid input!\n*************\n")
                 # Log
                 logger.error(f'An error message: ValueError in show_details() at')
                 self.main_menu()
@@ -401,12 +406,12 @@ class UnknownBank(SqlFuncs):
                     self.main_menu()
 
             except SyntaxError:
-                print("\n*************\nWrong input!\n*************\n")
+                print("\n*************\nInvalid input!\n*************\n")
                 # Log
                 logger.debug(f'An error message: SyntaxError in show_details()')
                 self.transaction_menu()
             except ValueError:
-                print("\n*************\nWrong input!\n*************\n")
+                print("\n*************\nInvalid input!\n*************\n")
                 # Log
                 logger.debug(f'An error message: ValueError in show_details()')
                 self.transaction_menu()
