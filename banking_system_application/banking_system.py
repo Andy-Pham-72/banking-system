@@ -111,20 +111,24 @@ class UnknownBank(SqlFuncs):
 
             self.execute(sql)
             print('New customer added successfully!\n\n')
-        except SyntaxError:
-            print("\n*************\nInvalid input! \nPlease Try Again!\n*************\n\n")
+
+        except TypeError as err:
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'An error message: SyntaxError in create_account()')
+            logger.error("Invalid input. An error message: {} from create_account()".format(err))
+            # Back to main menu
             self.main_menu()
-        except ValueError:
-            print("\n*************\nInvalid input! \nPlease Try Again! \n*************\n\n")
+        except ValueError as err:
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'An error message: ValueError in create_account()')
+            logger.error("Invalid input. An error message: {} in create_account()".format(err))
+            # Back to main menu
             self.main_menu()
         except mysql.connector.errors.ProgrammingError as err:
-            print("\n*************\nInvalid input: {}! \nPlease Try Again! \n*************\n\n".format(err))
+            print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
             # Log
-            logger.debug(f'A debug message: {err} from create_account()')
+            logger.debug("Invalid input. A debug message: {} from create_account()".format(err))
+            # Back to main menu
             self.main_menu()
 
     def account_status(self, acc_num):
@@ -349,7 +353,7 @@ class UnknownBank(SqlFuncs):
         except mysql.connector.errors.ProgrammingError as err:
             print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
             # Log
-            logger.debug("Invalid input: '{}' in show_details(). A debug message: {} from show_details()".format(self.acc_num,err))
+            logger.debug("Invalid input: '{}'. A debug message: {} from show_details()".format(self.acc_num,err))
             # Back to input acc_num
             self.show_details()
 
