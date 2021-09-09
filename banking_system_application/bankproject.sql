@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `status` char(15) DEFAULT NULL,
   `balance` float(15,2) DEFAULT NULL,
   PRIMARY KEY (`acc_no`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 --
 -- Inserting data for table `customer`
