@@ -165,23 +165,31 @@ class UnknownBank(SqlFuncs):
 
         try:
             self.acc_num = input("Enter Account Number: ")
-            sql = f"""UPDATE customer SET status = "close" WHERE acc_no = {self.acc_num} ;"""
-            self.execute(sql)
-            print("Account Closed!")
-        except SyntaxError:
-            print("\n*************\nInvalid input! \nPlease Try Again!\n*************\n\n")
+            
+            sql1 = f"""SELECT status FROM customer WHERE acc_no = {self.acc_num} ;"""
+            self.execute(sql1)
+            result = self.fetchall()
+            
+            if len(result) < 1:
+                print("\nAccount number {} does not exist in the database.\nPlease try again!\n".format(self.acc_num))
+                # Log
+                logger.error("Invalid input: Account number '{}' does not exist in the database.".format(self.acc_num))
+            else:
+                sql2 = f"""UPDATE customer SET status = "close" WHERE acc_no = {self.acc_num} ;"""
+                self.execute(sql2)
+                print("Account Closed!")
+            
+        except ValueError as err:
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'A error message: SyntaxError in close_account()')
-            self.main_menu()
-        except ValueError:
-            print("\n*************\nInvalid input! \nPlease Try Again! \n*************\n\n")
-            # Log
-            logger.error(f'A error message: ValueError in close_account()')
+            logger.error("Invalid input: '{}' . An error message: {} in close_account()".format(self.acc_num,err))
+            # Back to main menu
             self.main_menu()
         except mysql.connector.errors.ProgrammingError as err:
-            print("\n*************\nInvalid input: {}! \nPlease Try Again! \n*************\n\n".format(err))
+            print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
             # Log
-            logger.debug(f'A debug message: {err} from close_account()')
+            logger.debug("Invalid input: '{}'. A debug message: {} from close_account()".format(self.acc_num,err))
+            # Back to main menu
             self.main_menu()
 
     def deposit_amount(self):
@@ -341,7 +349,7 @@ class UnknownBank(SqlFuncs):
         except mysql.connector.errors.ProgrammingError as err:
             print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
             # Log
-            logger.debug("Invalid input: '{}' in show_details(). A debug message: {}".format(self.acc_num,err))
+            logger.debug("Invalid input: '{}' in show_details(). A debug message: {} from show_details()".format(self.acc_num,err))
             # Back to input acc_num
             self.show_details()
 
