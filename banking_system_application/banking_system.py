@@ -208,20 +208,27 @@ class UnknownBank(SqlFuncs):
                 print("\n\nClosed or Suspended Account!")
             self.wait = input("\n\n\nPress enter key to continue....")
 
-        except SyntaxError:
-            print("\n*************\nInvalid input! \nPlease Try Again!\n*************\n\n")
+        except ValueError as err:
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'An error message: SyntaxError in deposit_amount()')
+            logger.error("Invalid input: with the amount: '{}' and the account number: '{}'. \
+                        An error message: {} in deposit_amount()".format(self.amount,self.acc_num,err))
+            # Back to transaction menu
             self.transaction_menu()
-        except ValueError:
-            print("\n*************\nInvalid input! \nPlease Try Again! \n*************\n\n")
+        except TypeError as err:
+            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error(f'An error message: ValueError in deposit_amount()')
+            logger.error("Invalid input: with the amount: '{}' and the account number: '{}'. \
+                        An error message: {} in deposit_amount()".format(self.amount,self.acc_num,err))
+            # Back to transaction menu
             self.transaction_menu()
         except mysql.connector.errors.ProgrammingError as err:
-            print("\n*************\nInvalid input: {}! \nPlease Try Again! \n*************\n\n".format(err))
+            print("\n*************\nInvalid input associating with MySql syntax: {}! \
+                    \nPlease Try Again! \n*************\n\n".format(err))
             # Log
-            logger.debug(f'A debug message: {err} from deposit_amount()')
+            logger.debug("Invalid input: for the amount: '{}' and the account number: '{}'. \
+                        A debug message: {} in deposit_amount()".format(self.amount,self.acc_num,err))
+            # Back to transaction menu
             self.transaction_menu()
 
     def withdraw_amount(self):
@@ -260,14 +267,14 @@ class UnknownBank(SqlFuncs):
         except ValueError as err:
             print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error("Invalid input: for the amount: '{}' and the account number: '{}' in withdraw_amount(). \
+            logger.error("Invalid input: for the amount: '{}' and the account number: '{}'. \
                         An error message: {} in withdraw_amount()".format(self.amount,self.acc_num,err))
             # Back to transaction menu
             self.transaction_menu()
         except TypeError as err:
             print("\n*************\Invalid input!\n*************\nPlease try again!\n")
             # Log
-            logger.error("Invalid input: for the amount: '{}' and the account number: '{}' in withdraw_amount(). \
+            logger.error("Invalid input: for the amount: '{}' and the account number: '{}'. \
                         An error message: {} in withdraw_amount()".format(self.amount,self.acc_num,err))
             # Back to transaction menu
             self.transaction_menu()
@@ -275,8 +282,8 @@ class UnknownBank(SqlFuncs):
             print("\n*************\nInvalid input associating with MySql syntax: {}! \
                     \nPlease Try Again! \n*************\n\n".format(err))
             # Log
-            logger.debug("Invalid input: for the amount: '{}' and the account number: '{}' in withdraw_amount(). \
-                        A debug message: {}".format(self.amount,self.acc_num,err))
+            logger.debug("Invalid input: for the amount: '{}' and the account number: '{}'. \
+                        A debug message: {} in withdraw_amount()".format(self.amount,self.acc_num,err))
             # Back to transaction menu
             self.transaction_menu()
 
