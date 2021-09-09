@@ -313,15 +313,15 @@ class UnknownBank(SqlFuncs):
         except SyntaxError:
             print("\n*************\nWrong input!\n*************\n")
             # Log
-            logger.error(f'An error message: SyntaxError in show_details()}')
+            logger.error(f'An error message: SyntaxError in show_details()')
             self.show_details()
         except ValueError:
             print("\n*************\nWrong input!\n*************\n")
             # Log
-            logger.error(f'An error message: ValueError in show_details()}')
+            logger.error(f'An error message: ValueError in show_details()')
             self.show_details()
         except mysql.connector.errors.ProgrammingError as err:
-            logger.debug(f'A debug message: {err}}')
+            logger.debug(f'A debug message: {err}')
             print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
             self.show_details()
 
