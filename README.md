@@ -52,6 +52,8 @@ shell> msiexec /i mysql-connector-python-VER-pyPYVER.msi
 ```
 
 ## Future works:
+* The `banking_system.py` script still has some flaws in terms of the syntax, exception handling and logical issue that will be updated and fixed along the way. Any comments and suggestions are very appreciated! I am still learning, Thanks All!
+
 * I want to add more features for the banking system; for example: 
     - `Search Menu` (using account number, email, phone number, first name, or last name to list the corresponding customer information),
     - `Daily and Monthly Reports` to show the updated account information, 
