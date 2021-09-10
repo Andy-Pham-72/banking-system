@@ -1,6 +1,7 @@
 import mysql.connector
 from datetime import date
 import logging
+import json
 
 # Creates a logger
 logger = logging.getLogger(__name__)
@@ -16,13 +17,17 @@ file_handler.setFormatter(formatter)
 # add file handler to logger
 logger.addHandler(file_handler)
 
+# Open json file
+f = open("banking_system_application/config.json")
+
+# load json object
+config = json.load(f)
 
 class SqlFuncs:
     """class SqlFuncs is created to access the essential mysql.connector's functions"""
 
     def __init__(self):
-        self._conn = mysql.connector.connect(host='localhost', user='root', database='bankingsys',
-                                             passwd='rootroot')  # use your password here
+        self._conn = mysql.connector.connect(**config)  # use your password here
         self._cursor = self._conn.cursor()
 
     def __enter__(self):
