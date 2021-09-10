@@ -113,13 +113,13 @@ class UnknownBank(SqlFuncs):
             print('New customer added successfully!\n\n')
 
         except TypeError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input. An error message: {} from create_account()".format(err))
             # Back to main menu
             self.main_menu()
         except ValueError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input. An error message: {} in create_account()".format(err))
             # Back to main menu
@@ -184,7 +184,7 @@ class UnknownBank(SqlFuncs):
                 print("Account Closed!")
             
         except ValueError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input: '{}' . An error message: {} in close_account()".format(self.acc_num,err))
             # Back to main menu
@@ -221,14 +221,14 @@ class UnknownBank(SqlFuncs):
             self.wait = input("\n\n\nPress enter key to continue....")
 
         except ValueError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input: with the amount: '{}' and the account number: '{}'. \
                         An error message: {} in deposit_amount()".format(self.amount,self.acc_num,err))
             # Back to transaction menu
             self.transaction_menu()
         except TypeError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input: with the amount: '{}' and the account number: '{}'. \
                         An error message: {} in deposit_amount()".format(self.amount,self.acc_num,err))
@@ -277,14 +277,14 @@ class UnknownBank(SqlFuncs):
             self.wait = input('\n\n\nPress enter key to continue....')
 
         except ValueError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input: for the amount: '{}' and the account number: '{}'. \
                         An error message: {} in withdraw_amount()".format(self.amount,self.acc_num,err))
             # Back to transaction menu
             self.transaction_menu()
         except TypeError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input: for the amount: '{}' and the account number: '{}'. \
                         An error message: {} in withdraw_amount()".format(self.amount,self.acc_num,err))
@@ -339,13 +339,13 @@ class UnknownBank(SqlFuncs):
             self.wait = input('\n\n\nPress enter key to continue....')
 
         except ValueError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input: '{}' . An error message: {} in show_details()".format(self.acc_num,err))
             # Back to input acc_num
             self.show_details()
         except TypeError as err:
-            print("\n*************\Invalid input!\n*************\nPlease try again!\n")
+            print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
             # Log
             logger.error("Invalid input: '{}' . An error message: {} in show_details()".format(self.acc_num,err))
             # Back to input acc_num
@@ -388,15 +388,17 @@ class UnknownBank(SqlFuncs):
                 if option == 5:
                     break
 
-            except SyntaxError:
-                print("\n*************\nInvalid input!\n*************\n")
+            except TypeError as err:
+                print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
                 # Log
-                logger.error(f'An error message: SyntaxError in show_details()')
+                logger.error("Invalid input: '{}' - ValueError message: {} from main_menu() at".format(option, err))
+                # Back to main menu
                 self.main_menu()
-            except ValueError:
-                print("\n*************\nInvalid input!\n*************\n")
+            except ValueError as err:
+                print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
                 # Log
-                logger.error(f'An error message: ValueError in show_details() at')
+                logger.error("Invalid input: '{}' - ValueError message: {} from main_menu() at".format(option, err))
+                # Back to main menu
                 self.main_menu()
 
     def transaction_menu(self):
@@ -424,15 +426,17 @@ class UnknownBank(SqlFuncs):
                 if option == 3:
                     self.main_menu()
 
-            except SyntaxError:
-                print("\n*************\nInvalid input!\n*************\n")
+            except TypeError as err:
+                print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
                 # Log
-                logger.debug(f'An error message: SyntaxError in show_details()')
+                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu() at".format(option, err))
+                # Back to transaction menu
                 self.transaction_menu()
-            except ValueError:
-                print("\n*************\nInvalid input!\n*************\n")
+            except ValueError as err:
+                print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
                 # Log
-                logger.debug(f'An error message: ValueError in show_details()')
+                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu() at".format(option, err))
+                # Back to transaction menu
                 self.transaction_menu()
 
 
