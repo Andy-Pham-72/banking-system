@@ -9,7 +9,7 @@ We can easily run the .py file in the command line in order to experience the ap
 
 All the classes, methods, and functions are documented with docstring comments.
 
-The project consists of 2 main files and 1 log file:
+The project consists of 3 main files and 1 log file:
 * 1. **[banking_system.py](https://github.com/Andy-Pham-72/banking-system/blob/master/banking_system_application/banking_system.py)** - source code to run the application
 * 2. **[banking_system.sql](https://github.com/Andy-Pham-72/banking-system/blob/master/banking_system_application/bankproject.sql)** - MySql database script
 * 3. **[config.json](https://github.com/Andy-Pham-72/banking-system/blob/master/banking_system_application/config.json)** - MySql configuration json file
