@@ -1,5 +1,5 @@
 import mysql.connector
-from datetime import date, datetime
+from datetime import date
 import logging
 
 # Creates a logger
@@ -39,9 +39,11 @@ class SqlFuncs:
     def cursor(self):
         return self._cursor
 
-    def execute(self, sql):
-        """Implements execute function"""
-        self.cursor.execute(sql)
+    # def execute(self, sql):
+    #     """Implements execute function"""
+    #     self.cursor.execute(sql)
+    def execute(self, sql, params=None):
+        self.cursor.execute(sql, params or ())
 
     def commit(self):
         """Implements commit function"""
@@ -104,12 +106,16 @@ class UnknownBank(SqlFuncs):
             self.acc_type = input("Account type (saving/checking): ")
             self.balance = input("Enter opening balance: ")
 
-            sql = f""" INSERT INTO customer(first_name, last_name, dob, phone, email, acc_type, status, balance) VALUES 
-                    ('{self.first_name}','{self.last_name}','{self.dob}','{self.phone}','{self.email}','{self.acc_type}',
-                    'active',{self.balance}
-                     );"""
+            sql = "INSERT INTO customer(first_name, last_name, dob, phone, email, acc_type, status, balance) VALUES \
+                    (%s, %s, %s, %s, %s, %s, 'active', %s);"
 
-            self.execute(sql)
+            self.execute(sql,(self.first_name, 
+                              self.last_name, 
+                              self.dob, 
+                              self.phone, 
+                              self.email, 
+                              self.acc_type, 
+                              self.balance))
             print('New customer added successfully!\n\n')
 
         except TypeError as err:
@@ -124,6 +130,12 @@ class UnknownBank(SqlFuncs):
             logger.error("Invalid input. An error message: {} in create_account()".format(err))
             # Back to main menu
             self.main_menu()
+        except mysql.connector.errors.DataError as err:
+            print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
+            # Log
+            logger.debug("Invalid input. A debug message: {} from create_account()".format(err))
+            # Back to main menu
+            self.main_menu()
         except mysql.connector.errors.ProgrammingError as err:
             print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
             # Log
@@ -136,7 +148,7 @@ class UnknownBank(SqlFuncs):
 
         try:
             self.acc_num = acc_num
-            sql = f"""SELECT status, balance FROM customer WHERE acc_no = {self.acc_num};"""
+            sql = "SELECT status, balance FROM customer WHERE acc_no = %s;" % self.acc_num
             self.execute(sql)
             self._result = self.fetchone()
             return self._result
@@ -170,7 +182,7 @@ class UnknownBank(SqlFuncs):
         try:
             self.acc_num = input("Enter Account Number: ")
             
-            sql1 = f"""SELECT status FROM customer WHERE acc_no = {self.acc_num} ;"""
+            sql1 = "SELECT status FROM customer WHERE acc_no = %s;" % self.acc_num
             self.execute(sql1)
             result = self.fetchall()
             
@@ -179,7 +191,7 @@ class UnknownBank(SqlFuncs):
                 # Log
                 logger.error("Invalid input: Account number '{}' does not exist in the database.".format(self.acc_num))
             else:
-                sql2 = f"""UPDATE customer SET status = "close" WHERE acc_no = {self.acc_num} ;"""
+                sql2 = "UPDATE customer SET status = 'close' WHERE acc_no = %s;" % self.acc_num
                 self.execute(sql2)
                 print("Account Closed!")
             
@@ -208,17 +220,18 @@ class UnknownBank(SqlFuncs):
             result = self.account_status(self.acc_num)
 
             if result[0] == 'active':
-                sql1 = f""" UPDATE customer SET balance = balance + {self.amount}
-                       WHERE acc_no = {self.acc_num} AND status = "active" ; """
-                sql2 = f""" INSERT INTO transaction(date,amount,type,acc_no) VALUES 
-                        ("{today}", {self.amount}, "deposit", {self.acc_num}) ; """
+                sql1 = " UPDATE customer SET balance = balance + %s \
+                        WHERE acc_no = %s AND status = 'active' ;" % (self.amount, self.acc_num)
+                sql2 = " INSERT INTO transaction(date,amount,type,acc_no) \
+                        VALUES (%s, %s, 'deposit', %s) ; "
                 self.execute(sql1)
-                self.execute(sql2)
+                self.execute(sql2, (today, self.amount, self.acc_num))
                 print("\n\nAmount Deposited!")
 
             else:
                 print("\n\nClosed or Suspended Account!")
             self.wait = input("\n\n\nPress enter key to continue....")
+            self.transaction_menu()
 
         except ValueError as err:
             print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
@@ -233,6 +246,12 @@ class UnknownBank(SqlFuncs):
             logger.error("Invalid input: with the amount: '{}' and the account number: '{}'. \
                         An error message: {} in deposit_amount()".format(self.amount,self.acc_num,err))
             # Back to transaction menu
+            self.transaction_menu()
+        except mysql.connector.errors.DataError as err:
+            print("\n*************\nInvalid input associating with MySql syntax: {}! \nPlease Try Again! \n*************\n\n".format(err))
+            # Log
+            logger.debug("Invalid input. A debug message: {} from create_account()".format(err))
+            # Back to main menu
             self.transaction_menu()
         except mysql.connector.errors.ProgrammingError as err:
             print("\n*************\nInvalid input associating with MySql syntax: {}! \
@@ -261,20 +280,21 @@ class UnknownBank(SqlFuncs):
             result = self.account_status(self.acc_num)
 
             if result[0] == 'active' and int(result[1]) >= int(self.amount):
-                sql1 = f""" UPDATE customer SET balance = balance - {self.amount} 
-                        WHERE acc_no = {self.acc_num} AND status = "active" ;"""
-                sql2 = f""" INSERT INTO transaction(date, amount, type, acc_no)
-                        VALUES ( "{today}", {self.amount} , "withdraw" , {self.acc_num} ); """
+                sql1 = " UPDATE customer SET balance = balance - %s \
+                        WHERE acc_no = %s AND status = 'active' ;" % (self.amount, self.acc_num)
+                sql2 = " INSERT INTO transaction(date, amount, type, acc_no) \
+                        VALUES (%s, %s, 'withdraw', %s) ; "
 
                 self.execute(sql1)
-                self.execute(sql2)
+                self.execute(sql2, (today, self.amount, self.acc_num))
                 print('\n\nAmount Withdrawn!')
             elif result[0] == 'close':
                 print('\n\nClosed or Suspended Account!')
             else:
-                print('\n\nClosed or Suspended Account.Or Insufficient amount!')
+                print('\n\nInsufficient balance!')
 
             self.wait = input('\n\n\nPress enter key to continue....')
+            self.transaction_menu()
 
         except ValueError as err:
             print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
@@ -311,8 +331,8 @@ class UnknownBank(SqlFuncs):
 
         try:
             self.acc_num = input("Enter Account Number: ")
-            sql1 = f"""SELECT * FROM customer WHERE acc_no = {self.acc_num} ;"""
-            sql2 = f"""SELECT date, amount, type FROM transaction AS t WHERE t.acc_no = {self.acc_num} ;"""
+            sql1 = "SELECT * FROM customer WHERE acc_no = %s ;" % self.acc_num
+            sql2 = "SELECT date, amount, type FROM transaction AS t WHERE t.acc_no = (%s) ;" % self.acc_num
             self.execute(sql1)
             result = self.fetchone()
             print("\n")
@@ -324,6 +344,7 @@ class UnknownBank(SqlFuncs):
             print(f"Contact Number: {result[4]}")
             print(f"Customer Email: {result[5]}")
             print(f"Account Type: {result[6]}")
+            print(f"Account Status: {result[7]}")
             print(f"Account Balance: $ {str(result[8])}")
             print("*" * 50)
             print("\n")
@@ -377,15 +398,17 @@ class UnknownBank(SqlFuncs):
             print('\n\n')
             try:
                 option = int(input('Enter your option ...: '))
+
                 if option == 1:
                     self.create_account()
-                if option == 2:
+                elif option == 2:
                     self.show_details()
-                if option == 3:
+                elif option == 3:
                     self.close_account()
-                if option == 4:
+                elif option == 4:
                     self.transaction_menu()
-                if option == 5:
+                elif option == 5:
+                    print("\n*****************\nSee You Next Time!\n*****************\n")
                     break
 
             except TypeError as err:
@@ -414,28 +437,28 @@ class UnknownBank(SqlFuncs):
         while True:
             print("\n ----- TRANSACTION MENU ----- ")
             print("\n1.  Deposit Amount")
-            print('\n2.  WithDraw Amount')
+            print('\n2.  Withdraw Amount')
             print('\n3.  Back to Main Menu')
             print('\n\n')
             try:
-                option = int(input('Enter your option ...: '))
-                if option == 1:
+                option2 = int(input('Enter your option ...: '))
+                if option2 == 1:
                     self.deposit_amount()
-                if option == 2:
+                if option2 == 2:
                     self.withdraw_amount()
-                if option == 3:
+                if option2 == 3:
                     self.main_menu()
 
             except TypeError as err:
                 print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
                 # Log
-                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu() at".format(option, err))
+                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu() at".format(option2, err))
                 # Back to transaction menu
                 self.transaction_menu()
             except ValueError as err:
                 print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
                 # Log
-                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu() at".format(option, err))
+                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu() at".format(option2, err))
                 # Back to transaction menu
                 self.transaction_menu()
 
