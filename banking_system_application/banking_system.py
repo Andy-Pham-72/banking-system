@@ -452,13 +452,13 @@ class UnknownBank(SqlFuncs):
             except TypeError as err:
                 print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
                 # Log
-                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu() at".format(option2, err))
+                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu()".format(option2, err))
                 # Back to transaction menu
                 self.transaction_menu()
             except ValueError as err:
                 print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
                 # Log
-                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu() at".format(option2, err))
+                logger.error("Invalid input: '{}' - ValueError message: {} from transaction_menu()".format(option2, err))
                 # Back to transaction menu
                 self.transaction_menu()
 
