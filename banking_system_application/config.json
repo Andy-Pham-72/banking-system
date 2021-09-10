@@ -1,0 +1,4 @@
+{	"host": "localhost", 
+	"user":"root", 
+	"database":"bankingsys",
+    "passwd" : "rootroot" 		}
