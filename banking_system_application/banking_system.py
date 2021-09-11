@@ -44,10 +44,8 @@ class SqlFuncs:
     def cursor(self):
         return self._cursor
 
-    # def execute(self, sql):
-    #     """Implements execute function"""
-    #     self.cursor.execute(sql)
     def execute(self, sql, params=None):
+        """Implements execute function"""
         self.cursor.execute(sql, params or ())
 
     def commit(self):
