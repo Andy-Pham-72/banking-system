@@ -19,7 +19,7 @@ The project consists of 3 main files and 1 log file:
 
 ![classes banking_system](https://user-images.githubusercontent.com/70767722/131917227-81c795f1-1713-4401-9c72-943c8e1e7577.png)
 
-**The ERR Diagram of the `bankingsys` schema**
+**The EER Diagram of the `bankingsys` schema**
 
 ![Screen Shot 2021-09-05 at 11 54 21 AM](https://user-images.githubusercontent.com/70767722/132133235-fbaa7328-bb50-4b71-b4b5-95363bb64233.png)
 
