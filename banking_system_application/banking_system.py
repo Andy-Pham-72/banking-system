@@ -2,6 +2,7 @@ import mysql.connector
 from datetime import date
 import logging
 import json
+import sys
 
 # Creates a logger
 logger = logging.getLogger(__name__)
@@ -24,7 +25,9 @@ f = open("banking_system_application/config.json")
 config = json.load(f)
 
 class SqlFuncs:
-    """class SqlFuncs is created to access the essential mysql.connector's functions"""
+    """
+    class SqlFuncs is created to access the essential mysql.connector's functions
+    """
 
     def __init__(self):
         self._conn = mysql.connector.connect(**config)  # use your password here
@@ -147,7 +150,9 @@ class UnknownBank(SqlFuncs):
             self.main_menu()
 
     def account_status(self, acc_num):
-        """method that returns account status and balance"""
+        """
+        method that returns account status and balance
+        """
 
         try:
             self.acc_num = acc_num
@@ -179,7 +184,6 @@ class UnknownBank(SqlFuncs):
         *************
 
         acc_num = int()
-
         """
 
         try:
@@ -234,7 +238,7 @@ class UnknownBank(SqlFuncs):
             else:
                 print("\n\nClosed or Suspended Account!")
             self.wait = input("\n\n\nPress enter key to continue....")
-            self.transaction_menu()
+            self.main_menu()
 
         except ValueError as err:
             print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
@@ -297,7 +301,7 @@ class UnknownBank(SqlFuncs):
                 print('\n\nInsufficient balance!')
 
             self.wait = input('\n\n\nPress enter key to continue....')
-            self.transaction_menu()
+            self.main_menu()
 
         except ValueError as err:
             print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
@@ -381,14 +385,16 @@ class UnknownBank(SqlFuncs):
             # Back to input acc_num
             self.show_details()
 
+    def exit_menu(self):
+        sys.exit(0)
+
     def main_menu(self):
         """
         method that shows the interface for all the banking options
         *************
         Input example
         *************
-        option = 1/2/3/4/5
-
+        /3/4/5
         """
 
         while True:
@@ -412,7 +418,7 @@ class UnknownBank(SqlFuncs):
                     self.transaction_menu()
                 elif option == 5:
                     print("\n*****************\nSee You Next Time!\n*****************\n")
-                    break
+                    self.exit_menu()
 
             except TypeError as err:
                 print("\n*************\nInvalid input!\n*************\nPlease try again!\n")
@@ -447,9 +453,9 @@ class UnknownBank(SqlFuncs):
                 option2 = int(input('Enter your option ...: '))
                 if option2 == 1:
                     self.deposit_amount()
-                if option2 == 2:
+                elif option2 == 2:
                     self.withdraw_amount()
-                if option2 == 3:
+                elif option2 == 3:
                     self.main_menu()
 
             except TypeError as err:
