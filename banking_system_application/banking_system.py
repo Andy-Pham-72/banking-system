@@ -86,6 +86,12 @@ class UnknownBank(SqlFuncs):
         super().__init__()
         self.main_menu()
 
+    def exit_menu(self):
+        """
+        method that closes the application
+        """
+        sys.exit(0)
+
     def create_account(self):
         """
         method that creates a new account.
@@ -384,9 +390,6 @@ class UnknownBank(SqlFuncs):
             logger.debug("Invalid input: '{}'. A debug message: {} from show_details()".format(self.acc_num,err))
             # Back to input acc_num
             self.show_details()
-
-    def exit_menu(self):
-        sys.exit(0)
 
     def main_menu(self):
         """
