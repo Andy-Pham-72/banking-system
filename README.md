@@ -3,7 +3,7 @@ Python OOP - Banking System Case Study in Python.
 
 <img width="919" alt="Screen Shot 2021-09-02 at 5 13 06 PM" src="https://user-images.githubusercontent.com/70767722/131917196-200d6e84-ef4d-4eac-b4d6-c268dd6a9054.png">
 
-In this project, I created a simple version of a banking system which I incoporate some **Python fundamental skills**: inheritance, exception handling, logging, getter and setter methods along with **SQL database** that associates with the Python script in order to produce the csv as a type of data storage.
+In this project, I created a simple version of a banking system which I incorporate some **Python fundamental skills**: inheritance, exception handling, logging, getter and setter methods along with **SQL database** that associates with the Python script in order to produce the csv as a type of data storage.
 
 We can easily run the .py file in the command line in order to experience the app locally.
 
@@ -19,7 +19,7 @@ The project consists of 3 main files and 1 log file:
 
 ![classes banking_system](https://user-images.githubusercontent.com/70767722/131917227-81c795f1-1713-4401-9c72-943c8e1e7577.png)
 
-**The ERR Diagram of the `bankingsys` schema**
+**The EER Diagram of the `bankingsys` schema**
 
 ![Screen Shot 2021-09-05 at 11 54 21 AM](https://user-images.githubusercontent.com/70767722/132133235-fbaa7328-bb50-4b71-b4b5-95363bb64233.png)
 
