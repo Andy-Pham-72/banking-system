@@ -52,7 +52,8 @@ For Windows user:
 shell> msiexec /i mysql-connector-python-VER-pyPYVER.msi
 ```
 
-## Future works:
+## Thoughts & Future works:
+* The SQL schema doesn't take the slowly changing dimension in the consideration for the sake of illustrating the simple Python OOP purpose. In the reality the fact and dimension tables can expand exponentially accordingly for the various business components.
 * The `banking_system.py` script still has some flaws in terms of the syntax, exception handling and logical issue that will be updated and fixed along the way. Any comments and suggestions are very appreciated! I am still learning, Thanks All!
 
 * I want to add more features for the banking system; for example: 
